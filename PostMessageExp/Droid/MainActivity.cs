@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Webkit;
 
 namespace PostMessageExp.Droid
 {
@@ -8,6 +9,8 @@ namespace PostMessageExp.Droid
     public class MainActivity : Activity
     {
         int count = 1;
+
+        WebView webView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -19,8 +22,15 @@ namespace PostMessageExp.Droid
             // Get our button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.myButton);
+            webView = FindViewById<WebView>(Resource.Id.webView1);
 
             button.Click += delegate { button.Text = $"{count++} clicks!"; };
+            LoadHtml();
+        }
+
+        private void LoadHtml()
+        {
+            webView.LoadUrl("file:///android_asset/index.html");
         }
     }
 }

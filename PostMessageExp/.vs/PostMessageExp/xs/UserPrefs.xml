@@ -1,9 +1,11 @@
-﻿<Properties StartupConfiguration="{70405445-D8CE-4067-8695-4CA6648CD6E8}|Default">
-  <MonoDevelop.Ide.ItemProperties.PostMessageExp.Droid FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/ViewController.cs">
+﻿<Properties StartupConfiguration="{3BD5BA66-EEAB-4609-95F1-0B7E88B17CBE}|Default">
+  <MonoDevelop.Ide.ItemProperties.PostMessageExp.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.192.168.56.101:5555" />
+  <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="iOS/Info.plist" />
       <File FileName="iOS/ViewController.cs" Line="36" Column="20" />
+      <File FileName="Droid/Assets/AboutAssets.txt" Line="18" Column="1" />
+      <File FileName="Droid/MainActivity.cs" Line="17" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -12,6 +14,6 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.PostMessageExp FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.PostMessageExp.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.505F3A0A-031C-49EA-99C2-AB1B0E0E9FB2" automaticSigning="False" />
+  <MonoDevelop.Ide.ItemProperties.PostMessageExp.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C89AF8EA-1ADA-4926-9068-148FB59F52A6" automaticSigning="False" />
   <MultiItemStartupConfigurations />
 </Properties>
