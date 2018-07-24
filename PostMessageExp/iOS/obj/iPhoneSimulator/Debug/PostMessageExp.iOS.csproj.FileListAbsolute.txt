@@ -1,0 +1,12 @@
+/Users/ruffoloan/Projects/PostMessageExp/iOS/bin/iPhoneSimulator/Debug/PostMessageExp.iOS.exe
+/Users/ruffoloan/Projects/PostMessageExp/iOS/bin/iPhoneSimulator/Debug/PostMessageExp.iOS.pdb
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/ibtool/_BundleResourceWithLogicalName.items
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/actool/_PartialAppManifest.items
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/actool/_BundleResourceWithLogicalName.items
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/coremlc/_PartialAppManifest.items
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/coremlc/_BundleResourceWithLogicalName.items
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/optimized/
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/PostMessageExp.iOS.csprojResolveAssemblyReference.cache
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/PostMessageExp.iOS.csproj.CoreCompileInputs.cache
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/PostMessageExp.iOS.exe
+/Users/ruffoloan/Projects/PostMessageExp/iOS/obj/iPhoneSimulator/Debug/PostMessageExp.iOS.pdb

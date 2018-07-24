@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{70405445-D8CE-4067-8695-4CA6648CD6E8}|Default">
+  <MonoDevelop.Ide.ItemProperties.PostMessageExp.Droid FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/ViewController.cs">
+    <Files>
+      <File FileName="iOS/Info.plist" />
+      <File FileName="iOS/ViewController.cs" Line="36" Column="20" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.PostMessageExp FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.PostMessageExp.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.505F3A0A-031C-49EA-99C2-AB1B0E0E9FB2" automaticSigning="False" />
+  <MultiItemStartupConfigurations />
+</Properties>
