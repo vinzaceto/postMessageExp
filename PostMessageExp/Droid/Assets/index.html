@@ -17,16 +17,19 @@
     <input type="submit" value="Click to send">
   </form>
 
-    <script>
-      window.addEventListener('message', function(event) {
-        alert(`Received ${event.data} from ${event.origin}`);
-      });
+  <script>window.addEventListener('message', function(event) {
+          alert(`Received ${event.data} from ${event.origin}`);
+});
 
-    form.onsubmit = function() {         
-      window.postMessage(this.message.value, '*');
-      return false;
-    };
+form.onsubmit = function() {
+          window.postMessage(this.message.value, '*');
+          return false;
+};
 
-    </script>
+function PostMessageForAlert(gas) {
+          window.postMessage(gas, '*');
+}
+
+</script>
 </body>
 </html>
