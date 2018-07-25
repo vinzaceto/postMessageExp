@@ -2,6 +2,7 @@
 using Android.Widget;
 using Android.OS;
 using Android.Webkit;
+using Java.Lang;
 
 namespace PostMessageExp.Droid
 {
@@ -11,6 +12,7 @@ namespace PostMessageExp.Droid
         int count = 1;
 
         WebView webView;
+        ProgressDialog mDialog;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,12 +26,16 @@ namespace PostMessageExp.Droid
             Button button = FindViewById<Button>(Resource.Id.myButton);
             webView = FindViewById<WebView>(Resource.Id.webView1);
 
+            mDialog = new ProgressDialog(this);
+            mDialog.SetMessage("Please wait...");
+            mDialog.SetCancelable(false);
+
             webView.ClearCache(true);
             webView.ClearHistory();
             webView.Settings.JavaScriptEnabled = true;
             webView.Settings.JavaScriptCanOpenWindowsAutomatically = true;
             webView.SetWebChromeClient(new WebChromeClient());
-            webView.AddJavascriptInterface(new JSI(), "MyJSInterface");
+            webView.AddJavascriptInterface(new JSI(this), "MyJSInterface");
 
 
             button.Click += delegate { 
@@ -43,6 +49,24 @@ namespace PostMessageExp.Droid
         {
             webView.LoadUrl("file:///android_asset/index.html");
         }
+
+        public void showLoader(bool show)
+        {
+            RunOnUiThread(() => {
+                if (mDialog != null)
+                {
+                    if (show)
+                    {
+                        mDialog.Show();
+                    }
+                    else
+                    {
+                        mDialog.Dismiss();
+                    }
+                }
+            });
+                
+            }
     }
 }
 

@@ -5,10 +5,11 @@ namespace PostMessageExp.Droid
 {
     public class JSI : Java.Lang.Object
     {
+        MainActivity _activity;
 
-        public JSI()
+        public JSI(MainActivity activity)
         {
-            
+            _activity = activity;
         }
 
         [Export]
@@ -16,6 +17,15 @@ namespace PostMessageExp.Droid
         public void NativeFunction()
         {
             System.Diagnostics.Debug.WriteLine("Native Function Called");
+        }
+
+        [Export]
+        [JavascriptInterface]
+        public void showLoader(bool show)
+        {
+            if (_activity != null) {
+                _activity.showLoader(show);
+            }
         }
 
     }

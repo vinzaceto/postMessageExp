@@ -18,7 +18,10 @@
 
   <script>window.addEventListener('message', function(event) {
           alert(`Received ${event.data} from ${event.origin}`);
-    MyJSInterface.NativeFunction();
+            MyJSInterface.showLoader(true);
+            setTimeout(function () {
+                MyJSInterface.showLoader(false);
+            }, 5000);
 });
 
 form.onsubmit = function() {
