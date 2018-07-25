@@ -18,7 +18,10 @@
 </form>
 
 <script>window.addEventListener('message', function (event) {
-    window.location = "postMesssageIsCalling://null"
+    
+    var ciao = {nome: "Antonio", cognome: "Ruffolo"};
+    
+    window.location = "postMesssageIsCalling://" + JSON.stringify(ciao);
     alert(`Received ${event.data} from ${event.origin}`);
 });
 

@@ -71,9 +71,15 @@ namespace PostMessageExp.iOS
     public override bool ShouldStartLoad(UIWebView webView, NSUrlRequest request, UIWebViewNavigationType navigationType)
     {
       NSUrl url = request.Url;
-      if (url.Scheme == "postmesssageiscalling")
+      if (url.Scheme.Equals("postmesssageiscalling", StringComparison.CurrentCultureIgnoreCase))
       {
-        System.Diagnostics.Debug.WriteLine("Chiamato");
+        System.Diagnostics.Debug.WriteLine("Message from javascript has been called");
+        if (!string.IsNullOrEmpty(url.ResourceSpecifier))
+        {
+          var content = url.ResourceSpecifier;
+          var contentDecoded = Uri.UnescapeDataString(content).Remove(0, 2);
+          System.Diagnostics.Debug.WriteLine("Contenuto arrivato " + contentDecoded);
+        }
       }
       else if (url.Scheme == "updategraphgc")
       {
