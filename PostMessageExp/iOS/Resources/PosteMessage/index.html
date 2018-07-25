@@ -12,23 +12,23 @@
 </head>
 <body>
 
-  <form id="form">
+<form id="form">
     <input type="text" placeholder="Enter message" name="message">
     <input type="submit" value="Click to send">
-  </form>
+</form>
 
-  <script>window.addEventListener('message', function(event) {
-          alert(`Received ${event.data} from ${event.origin}`);
+<script>window.addEventListener('message', function (event) {
+    window.location = "postMesssageIsCalling://null"
+    alert(`Received ${event.data} from ${event.origin}`);
 });
 
-form.onsubmit = function() {
-          window.postMessage(this.message.value, '*');
-          return false;
+form.onsubmit = function () {
+    window.postMessage(this.message.value, '*');
+    return false;
 };
 
 function PostMessageForAlert(gas) {
-          window.postMessage(gas, '*');
-}
-</script>
+    window.postMessage(gas, '*');
+}</script>
 </body>
 </html>
