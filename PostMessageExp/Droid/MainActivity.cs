@@ -12,7 +12,7 @@ namespace PostMessageExp.Droid
         int count = 1;
 
         WebView webView;
-        ProgressDialog mDialog;
+        Dialog dialog;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -26,9 +26,10 @@ namespace PostMessageExp.Droid
             Button button = FindViewById<Button>(Resource.Id.myButton);
             webView = FindViewById<WebView>(Resource.Id.webView1);
 
-            mDialog = new ProgressDialog(this);
-            mDialog.SetMessage("Please wait...");
-            mDialog.SetCancelable(false);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            //View view = getLayoutInflater().inflate(R.layout.progress);
+            builder.SetView(Resource.Layout.Loader);
+            dialog = builder.Create();
 
             webView.ClearCache(true);
             webView.ClearHistory();
@@ -53,20 +54,11 @@ namespace PostMessageExp.Droid
         public void showLoader(bool show)
         {
             RunOnUiThread(() => {
-                if (mDialog != null)
-                {
-                    if (show)
-                    {
-                        mDialog.Show();
-                    }
-                    else
-                    {
-                        mDialog.Dismiss();
-                    }
-                }
+                if (show) dialog.Show();
+                else dialog.Dismiss();
             });
                 
-            }
+        }
     }
 }
 
