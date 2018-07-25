@@ -24,6 +24,12 @@ namespace PostMessageExp.Droid
             Button button = FindViewById<Button>(Resource.Id.myButton);
             webView = FindViewById<WebView>(Resource.Id.webView1);
 
+            webView.ClearCache(true);
+            webView.ClearHistory();
+            webView.Settings.JavaScriptEnabled = true;
+            webView.Settings.JavaScriptCanOpenWindowsAutomatically = true;
+            webView.SetWebChromeClient(new WebChromeClient());
+
             button.Click += delegate { button.Text = $"{count++} clicks!"; };
             LoadHtml();
         }
