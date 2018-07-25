@@ -8,6 +8,8 @@ namespace PostMessageExp.iOS
   {
     int count = 1;
 
+    private string jsonStringToSend = "{\"employees\": [{ \"firstName\":\"John\", \"lastName\":\"Doe\" }, { \"firstName\":\"Anna\" , \"lastName\":\"Smith\" },{ \"firstName\": \"Peter\" , \"lastName\": \"Jones \" }]}";
+
     public ViewController(IntPtr handle) : base(handle)
     {
     }
@@ -23,7 +25,7 @@ namespace PostMessageExp.iOS
         var title = string.Format("{0} clicks!", count++);
         Button.SetTitle(title, UIControlState.Normal);
 
-        webView.EvaluateJavascript(string.Format("javascript:PostMessageForAlert('{0}');", "ciao alert"));
+        webView.EvaluateJavascript(string.Format("javascript:PostMessageForAlert('{0}');", jsonStringToSend));
       };
 
       var webViewDelegate = new PostMessageWebViewDelegate(this.webView);
