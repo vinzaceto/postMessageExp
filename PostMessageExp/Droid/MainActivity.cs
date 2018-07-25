@@ -29,8 +29,13 @@ namespace PostMessageExp.Droid
             webView.Settings.JavaScriptEnabled = true;
             webView.Settings.JavaScriptCanOpenWindowsAutomatically = true;
             webView.SetWebChromeClient(new WebChromeClient());
+            webView.AddJavascriptInterface(new JSI(), "MyJSInterface");
 
-            button.Click += delegate { button.Text = $"{count++} clicks!"; };
+
+            button.Click += delegate { 
+                button.Text = $"{count++} clicks!"; 
+                webView.EvaluateJavascript(string.Format("javascript:PostMessageForAlert('{0}');", "ciao alert"),null);
+            };
             LoadHtml();
         }
 

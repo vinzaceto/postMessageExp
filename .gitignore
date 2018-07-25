@@ -45,3 +45,7 @@ PostMessageExp/iOS/obj/iPhoneSimulator/Debug/PostMessageExp.iOS.pdb
 PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/actool/asset-manifest.plist
 PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/mtouch-cache/arguments
 PostMessageExp/iOS/obj/iPhoneSimulator/Debug/device-builds/iphone10.3-11.4/mtouch-cache/assembly-references.txt
+
+PostMessageExp/Droid/bin/Debug/
+
+PostMessageExp/Droid/obj/Debug/
