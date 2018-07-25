@@ -11,6 +11,8 @@ namespace PostMessageExp.Droid
     {
         int count = 1;
 
+        private string jsonStringToSend = "{\"employees\": [{ \"firstName\":\"John\", \"lastName\":\"Doe\" }, { \"firstName\":\"Anna\" , \"lastName\":\"Smith\" },{ \"firstName\": \"Peter\" , \"lastName\": \"Jones \" }]}";
+
         WebView webView;
         Dialog dialog;
 
@@ -41,7 +43,7 @@ namespace PostMessageExp.Droid
 
             button.Click += delegate { 
                 button.Text = $"{count++} clicks!"; 
-                webView.EvaluateJavascript(string.Format("javascript:PostMessageForAlert('{0}');", "ciao alert"),null);
+                webView.EvaluateJavascript(string.Format("javascript:PostMessageForAlert('{0}');", jsonStringToSend),null);
             };
             LoadHtml();
         }

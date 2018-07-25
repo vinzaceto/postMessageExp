@@ -17,6 +17,11 @@
   </form>
 
   <script>window.addEventListener('message', function(event) {
+
+    var user = {nome: "Vincenzo", cognome: "Aceto"};
+    
+    MyJSInterface.messageJson(JSON.stringify(user));
+
           alert(`Received ${event.data} from ${event.origin}`);
             MyJSInterface.showLoader(true);
             setTimeout(function () {

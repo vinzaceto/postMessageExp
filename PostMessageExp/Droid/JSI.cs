@@ -28,5 +28,12 @@ namespace PostMessageExp.Droid
             }
         }
 
+        [Export]
+        [JavascriptInterface]
+        public void messageJson(string show)
+        {
+            System.Diagnostics.Debug.WriteLine(show);
+        }
+
     }
 }
