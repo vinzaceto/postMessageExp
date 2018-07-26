@@ -109,6 +109,10 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="WkViewController.cs" />
+    <Compile Include="WkViewController.designer.cs">
+      <DependentUpon>WkViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\PosteMessage\index.html" />

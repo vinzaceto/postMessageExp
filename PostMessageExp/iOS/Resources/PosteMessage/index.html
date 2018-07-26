@@ -22,8 +22,17 @@
     var ciao = {nome: "Antonio", cognome: "Ruffolo"};
     
     window.location = "postMesssageIsCalling://" + JSON.stringify(ciao);
+    
+    functionCallForNativeCode(JSON.stringify(ciao));
+    
     alert(`Received ${event.data} from ${event.origin}`);
 });
+
+function functionCallForNativeCode(messageBody) 
+{
+    // this must be used to call the WkWebView message handler
+    window.webkit.messageHandlers.functionCallForNativeCode.postMessage(messageBody);
+}
 
 form.onsubmit = function () {
     window.postMessage(this.message.value, '*');
