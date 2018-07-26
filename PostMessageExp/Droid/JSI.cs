@@ -3,6 +3,7 @@ using Java.Interop;
 
 namespace PostMessageExp.Droid
 {
+    
     public class JSI : Java.Lang.Object
     {
         MainActivity _activity;

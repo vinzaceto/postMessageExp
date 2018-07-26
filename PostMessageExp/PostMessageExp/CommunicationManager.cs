@@ -1,9 +1,9 @@
 ﻿using System;
 namespace PostMessageExp
 {
-    public class MyClass
+    public class CommunicationManager
     {
-        public MyClass()
+        public CommunicationManager()
         {
         }
     }
