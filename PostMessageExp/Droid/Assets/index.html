@@ -18,15 +18,16 @@
 
   <script>window.addEventListener('message', function(event) {
 
-    var user = {nome: "Vincenzo", cognome: "Aceto"};
-    
-    MyJSInterface.messageJson(JSON.stringify(user));
+          var user = { nome: "Vincenzo", cognome: "Aceto" };
+
 
           alert(`Received ${event.data} from ${event.origin}`);
-            MyJSInterface.showLoader(true);
-            setTimeout(function () {
-                MyJSInterface.showLoader(false);
-            }, 5000);
+          MyJSInterface.showLoader(true);
+          setTimeout(function() {
+              MyJSInterface.showLoader(false);
+              MyJSInterface.messageJson(JSON.stringify(user));
+
+          }, 5000);
 });
 
 form.onsubmit = function() {
@@ -36,7 +37,6 @@ form.onsubmit = function() {
 
 function PostMessageForAlert(gas) {
           window.postMessage(gas, '*');
-}
-</script>
+}</script>
 </body>
 </html>
