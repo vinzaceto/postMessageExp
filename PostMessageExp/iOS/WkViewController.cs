@@ -24,7 +24,7 @@ namespace PostMessageExp.iOS
       var scriptDelegate = new WkPostMessageScriptMessageHandler();
 
       WKUserContentController contentController = new WKUserContentController();
-      contentController.AddScriptMessageHandler(scriptDelegate, "functionCallForNativeCode");
+            contentController.AddScriptMessageHandler(scriptDelegate, "sendToApp");
 
       WKWebViewConfiguration config = new WKWebViewConfiguration();
       config.UserContentController = contentController;
@@ -50,7 +50,7 @@ namespace PostMessageExp.iOS
 
     partial void buttonAction(UIButton sender)
     {
-      wkWebview.EvaluateJavaScript(string.Format("PostMessageForAlert('{0}');", jsonStringToSend), null);
+            wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonStringToSend), null);
     }
   }
 
@@ -72,7 +72,7 @@ namespace PostMessageExp.iOS
   {
     public override void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
     {
-      if (message.Name == "functionCallForNativeCode")
+            if (message.Name == "sendToApp")
       {
         var arguments = message.Body;
         System.Diagnostics.Debug.WriteLine("Contenuto arrivato " + arguments);

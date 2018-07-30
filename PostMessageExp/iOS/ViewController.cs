@@ -25,7 +25,7 @@ namespace PostMessageExp.iOS
         var title = string.Format("{0} clicks!", count++);
         Button.SetTitle(title, UIControlState.Normal);
 
-        webView.EvaluateJavascript(string.Format("javascript:PostMessageForAlert('{0}');", jsonStringToSend));
+                webView.EvaluateJavascript(string.Format("javascript:sendToWebviewContainer('{0}');", jsonStringToSend));
       };
 
       var webViewDelegate = new PostMessageWebViewDelegate(this.webView);

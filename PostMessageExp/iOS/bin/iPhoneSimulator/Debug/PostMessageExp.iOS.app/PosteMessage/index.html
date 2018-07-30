@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>iframe Window</title>
+    <style>
+        body {
+            background-color: #D53C2F;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<form id="form">
+    <input type="text" placeholder="Enter message" name="message">
+    <input type="submit" value="Click to send">
+</form>
+
+<script>window.addEventListener('message', function (event) {
+    
+    var ciao = {nome: "Antonio", cognome: "Ruffolo"};
+    
+    window.location = "postMesssageIsCalling://" + JSON.stringify(ciao);
+    
+    functionCallForNativeCode(JSON.stringify(ciao));
+    
+    alert(`Received ${event.data} from ${event.origin}`);
+});
+
+function functionCallForNativeCode(messageBody) 
+{
+    // this must be used to call the WkWebView message handler
+    window.webkit.messageHandlers.functionCallForNativeCode.postMessage(messageBody);
+}
+
+form.onsubmit = function () {
+    window.postMessage(this.message.value, '*');
+    return false;
+};
+
+function PostMessageForAlert(gas) {
+    window.postMessage(gas, '*');
+}</script>
+</body>
+</html>

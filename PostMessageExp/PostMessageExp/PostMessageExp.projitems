@@ -9,7 +9,13 @@
     <Import_RootNamespace>PostMessageExp</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)CommunicationManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CommunicationInterface.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Defines\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\CustomWebviewInterface.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\CustomWebviewManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Defines\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Managers\" />
   </ItemGroup>
 </Project>
