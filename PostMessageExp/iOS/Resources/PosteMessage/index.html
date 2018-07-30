@@ -14,27 +14,8 @@
     //Register to eventListener (For Test)
     window.addEventListener('message', function (event) {
 
-    {
-  "MESSAGE": {
-    "MESSAGE_TYPE": "STRING",
-    "REQUEST_ACTION": "STRING",
-    "FLOW_DATA": {
-      "ID_PROCESSO": "STRING",
-     "NOME_PROCESSO": "STRING",
-      "ESITO": "STRING",
-      "CODICE_ESITO": "STRING",
-      "TIPOLOGIA_ESITO": "STRING"
-
-    },
-    "TRACKING_ANALYTICS": {
-      "LIVELLO2": "STRING",
-      "LIVELLO3": "STRING"
-    }
-  }
-}
-
     var messageToJson = {
-        MESSAGE = {
+        MESSAGE : {
             MESSAGE_TYPE: "STRING",
             REQUEST_ACTION: "STRING",
             FLOW_DATA: {
@@ -50,7 +31,7 @@
                 LIVELLO3: "STRING"
             }
         }
-    }
+    };
 
     window.location = "postMesssageIsCalling://" + JSON.stringify(messageToJson);
     //Send json to App
