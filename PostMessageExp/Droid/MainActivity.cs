@@ -43,7 +43,7 @@ namespace PostMessageExp.Droid
 
             button.Click += delegate { 
                 button.Text = $"{count++} clicks!"; 
-                webView.EvaluateJavascript(string.Format("javascript:PostMessageForAlert('{0}');", jsonStringToSend),null);
+                webView.EvaluateJavascript(string.Format("javascript:sendToWebviewContainer('{0}');", jsonStringToSend),null);
             };
             LoadHtml();
         }

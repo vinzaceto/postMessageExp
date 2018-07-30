@@ -18,16 +18,29 @@
 
   <script>window.addEventListener('message', function(event) {
 
-          var user = { nome: "Vincenzo", cognome: "Aceto" };
+          var messageToJson = {
+              MESSAGE: {
+                  MESSAGE_TYPE: "STRING",
+                  REQUEST_ACTION: "STRING",
+                  FLOW_DATA: {
+                      ID_PROCESSO: "STRING",
+                      NOME_PROCESSO: "STRING",
+                      ESITO: "STRING",
+                      CODICE_ESITO: "STRING",
+                      TIPOLOGIA_ESITO: "STRING"
 
+                  },
+                  TRACKING_ANALYTICS: {
+                      LIVELLO2: "STRING",
+                      LIVELLO3: "STRING"
+                  }
+              }
+          };
+
+          sendToApp(JSON.stringify(messageToJson));
 
           alert(`Received ${event.data} from ${event.origin}`);
-          MyJSInterface.showLoader(true);
-          setTimeout(function() {
-              MyJSInterface.showLoader(false);
-              MyJSInterface.messageJson(JSON.stringify(user));
 
-          }, 5000);
 });
 
 form.onsubmit = function() {
@@ -35,8 +48,13 @@ form.onsubmit = function() {
           return false;
 };
 
-function PostMessageForAlert(gas) {
-          window.postMessage(gas, '*');
+function sendToApp(messageBody) {
+          // this must be used to call the interface to communicate with native side
+          MyJSInterface.messageJson(JSON.stringify(messageBody));
+}
+
+function sendToWebviewContainer(json) {
+          window.postMessage(json, '*');
 }</script>
 </body>
 </html>
