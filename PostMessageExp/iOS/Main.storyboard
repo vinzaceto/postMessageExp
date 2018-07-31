@@ -118,14 +118,23 @@
                                     <constraint firstAttribute="height" constant="400" id="UIl-ee-Yhx"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dmi-2I-X6A">
+                                <rect key="frame" x="16" y="617" width="64" height="30"/>
+                                <state key="normal" title="Close Me"/>
+                                <connections>
+                                    <action selector="CloseMe:" destination="Hez-Ql-BDZ" eventType="touchUpInside" id="LfB-jj-xaF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nQy-L8-8QO" firstAttribute="top" secondItem="UdX-J7-xX2" secondAttribute="bottom" id="Mto-AQ-QRg"/>
                             <constraint firstItem="nQy-L8-8QO" firstAttribute="leading" secondItem="LSx-F4-nlt" secondAttribute="leading" id="REd-w1-5r0"/>
                             <constraint firstAttribute="trailing" secondItem="nQy-L8-8QO" secondAttribute="trailing" id="ROn-LN-u7A"/>
+                            <constraint firstItem="Dmi-2I-X6A" firstAttribute="leading" secondItem="LSx-F4-nlt" secondAttribute="leading" constant="16" id="f7k-bT-Dlc"/>
                             <constraint firstItem="5uc-FY-dcv" firstAttribute="centerX" secondItem="LSx-F4-nlt" secondAttribute="centerX" id="ntF-ak-urx"/>
                             <constraint firstItem="79y-OV-taq" firstAttribute="top" secondItem="5uc-FY-dcv" secondAttribute="bottom" constant="109" id="oKo-qt-WWH"/>
+                            <constraint firstItem="79y-OV-taq" firstAttribute="top" secondItem="Dmi-2I-X6A" secondAttribute="bottom" constant="20" id="t84-TT-HiD"/>
                         </constraints>
                     </view>
                     <connections>

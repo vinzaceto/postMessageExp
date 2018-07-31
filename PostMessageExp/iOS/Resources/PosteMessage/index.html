@@ -23,7 +23,61 @@
             // this must be used to call the WkWebView message handler
             window.webkit.messageHandlers.onHtmlLoadCompleted.postMessage("");
         }
+        
+        callsForInitProcessing();
     }
+    
+    function callsForInitProcessing() {
+        setTimeout(function() {
+            var messageToJson = {
+                MESSAGE: {
+                    MESSAGE_TYPE: "STRING",
+                    REQUEST_ACTION: "startProcess",
+                    FLOW_DATA: {
+                        ID_PROCESSO: "STRING",
+                        NOME_PROCESSO: "STRING",
+                        ESITO: "STRING",
+                        CODICE_ESITO: "STRING",
+                        TIPOLOGIA_ESITO: "STRING"
+
+                    },
+                    TRACKING_ANALYTICS: {
+                        LIVELLO2: "STRING",
+                        LIVELLO3: "STRING"
+                    }
+                }
+            };
+
+            //Send json to App
+            sendToApp(JSON.stringify(messageToJson));
+        }, 5000);
+        
+        setTimeout(function() {
+            var messageToJson = {
+                MESSAGE: {
+                    MESSAGE_TYPE: "STRING",
+                    REQUEST_ACTION: "stopLoading",
+                    FLOW_DATA: {
+                        ID_PROCESSO: "STRING",
+                        NOME_PROCESSO: "STRING",
+                        ESITO: "STRING",
+                        CODICE_ESITO: "STRING",
+                        TIPOLOGIA_ESITO: "STRING"
+
+                    },
+                    TRACKING_ANALYTICS: {
+                        LIVELLO2: "STRING",
+                        LIVELLO3: "STRING"
+                    }
+                }
+            };
+
+            //Send json to App
+            sendToApp(JSON.stringify(messageToJson));
+        }, 10000);
+    }
+    
+    
     
     //Register to eventListener (For Test)
     window.addEventListener('message', function (event) {
