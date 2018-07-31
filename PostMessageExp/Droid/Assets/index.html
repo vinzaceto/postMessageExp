@@ -11,10 +11,10 @@
 </head>
 <body>
 
-  <form id="form">
+<form id="form">
     <input type="text" placeholder="Enter message" name="message">
     <input type="submit" value="Click to send">
-  </form>
+</form>
 
   <script>window.addEventListener('message', function(event) {
 
@@ -50,7 +50,7 @@ form.onsubmit = function() {
 
 function sendToApp(messageBody) {
           // this must be used to call the interface to communicate with native side
-          MyJSInterface.sendToApp(JSON.stringify(messageBody));
+          MyJSInterface.messageJson(JSON.stringify(messageBody));
 }
 
 function sendToWebviewContainer(json) {
@@ -58,3 +58,57 @@ function sendToWebviewContainer(json) {
 }</script>
 </body>
 </html>
+
+<script>window.addEventListener('message', function (event) {
+
+    var messageToJson = {
+        MESSAGE: {
+            MESSAGE_TYPE: "STRING",
+            REQUEST_ACTION: "STRING",
+            FLOW_DATA: {
+                ID_PROCESSO: "STRING",
+                NOME_PROCESSO: "STRING",
+                ESITO: "STRING",
+                CODICE_ESITO: "STRING",
+                TIPOLOGIA_ESITO: "STRING"
+
+            },
+            TRACKING_ANALYTICS: {
+                LIVELLO2: "STRING",
+                LIVELLO3: "STRING"
+            }
+        }
+    };
+
+    sendToApp(JSON.stringify(messageToJson));
+
+    alert(`Received ${event.data} from ${event.origin}`);
+
+});
+
+form.onsubmit = function () {
+    window.postMessage(this.message.value, '*');
+    return false;
+};
+
+function sendToApp(messageBody) {
+    if (iOS()) {
+        // this must be used to call the WkWebView message handler
+        window.webkit.messageHandlers.sendToApp.postMessage(messageBody);
+    }
+    else if (isAndroid()) {
+        // this must be used to call the interface to communicate with native side
+        MyJSInterface.messageJson(JSON.stringify(messageBody));
+    }
+}
+
+function isAndroid() {
+    var ua = navigator.userAgent.toLowerCase();
+    return  ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+}
+
+function sendToWebviewContainer(json) {
+    window.postMessage(json, '*');
+}
+
+</script>
