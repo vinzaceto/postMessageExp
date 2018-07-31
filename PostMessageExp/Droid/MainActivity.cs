@@ -3,19 +3,14 @@ using Android.Widget;
 using Android.OS;
 using Android.Webkit;
 using Java.Lang;
+using Android.Content;
 
 namespace PostMessageExp.Droid
 {
     [Activity(Label = "PostMessageExp", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
-
-        private string jsonStringToSend = "{\"employees\": [{ \"firstName\":\"John\", \"lastName\":\"Doe\" }, { \"firstName\":\"Anna\" , \"lastName\":\"Smith\" },{ \"firstName\": \"Peter\" , \"lastName\": \"Jones \" }]}";
-
-        WebView webView;
-        Dialog dialog;
-
+      
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -26,41 +21,13 @@ namespace PostMessageExp.Droid
             // Get our button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.myButton);
-            webView = FindViewById<WebView>(Resource.Id.webView1);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            //View view = getLayoutInflater().inflate(R.layout.progress);
-            builder.SetView(Resource.Layout.Loader);
-            dialog = builder.Create();
-
-            webView.ClearCache(true);
-            webView.ClearHistory();
-            webView.Settings.JavaScriptEnabled = true;
-            webView.Settings.JavaScriptCanOpenWindowsAutomatically = true;
-            webView.SetWebChromeClient(new WebChromeClient());
-            webView.AddJavascriptInterface(new JSI(this), "MyJSInterface");
-
 
             button.Click += delegate { 
-                button.Text = $"{count++} clicks!"; 
-                webView.EvaluateJavascript(string.Format("javascript:sendToWebviewContainer('{0}');", jsonStringToSend),null);
+                var m_activity = new Intent(this, typeof(WebviewActivity));
+                this.StartActivity(m_activity);            
             };
-            LoadHtml();
         }
 
-        private void LoadHtml()
-        {
-            webView.LoadUrl("http://www.digitalentitypreview.com/mobileapp/enel/enelenergia/R3/DEMO/postMessageIndex.html");
-        }
-
-        public void showLoader(bool show)
-        {
-            RunOnUiThread(() => {
-                if (show) dialog.Show();
-                else dialog.Dismiss();
-            });
-                
-        }
     }
 }
 

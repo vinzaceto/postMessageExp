@@ -8,9 +8,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hello" />
-    <android.webkit.WebView
-        android:layout_width="match_parent"
-        android:layout_height="481.5dp"
-        android:id="@+id/webView1"
-        android:layout_marginBottom="410.5dp" />
 </LinearLayout>
