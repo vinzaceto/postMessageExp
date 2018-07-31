@@ -32,8 +32,7 @@
                 }
             }
         };
-
-        window.location = "postMesssageIsCalling://" + JSON.stringify(messageToJson);
+                
         //Send json to App
         sendToApp(JSON.stringify(messageToJson));
 
@@ -55,7 +54,7 @@
         else if (isAndroid())
         {
             // this must be used to call the interface to communicate with native side
-            MyJSInterface.messageJson(JSON.stringify(messageBody));
+            MyJSInterface.sendToApp(JSON.stringify(messageBody));
         }
     }
 
