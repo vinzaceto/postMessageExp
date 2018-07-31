@@ -48,6 +48,11 @@ namespace PostMessageExp.Droid
             SetManager();
         }
 
+        internal void OnCallBackJS(MessageJson messageJson)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void OnHtmlLoadCompletedCAllBack()
         {
             //Send InitContainer request
@@ -100,7 +105,7 @@ namespace PostMessageExp.Droid
             webView.Settings.JavaScriptEnabled = true;
             webView.Settings.JavaScriptCanOpenWindowsAutomatically = true;
             webView.SetWebChromeClient(new WebChromeClient());
-            webView.AddJavascriptInterface(new JSI(this), "MyJSInterface");
+            webView.AddJavascriptInterface(new WebViewJSInterface(this), "WebViewJSInterface");
 
             webView.LoadUrl(command.URL);
         }
@@ -108,6 +113,11 @@ namespace PostMessageExp.Droid
         public void SendToContainer(string json)
         {
             webView.EvaluateJavascript(string.Format("javascript:sendToWebviewContainer('{0}');", json), null);
+        }
+
+        internal void OnCallBackJS()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
