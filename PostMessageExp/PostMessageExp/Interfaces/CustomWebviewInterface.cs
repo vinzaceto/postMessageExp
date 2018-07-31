@@ -1,4 +1,6 @@
 ﻿using System;
+using PostMessageExp.Models.WebView;
+
 namespace PostMessageExp
 {
     public interface CustomWebviewInterface
@@ -23,6 +25,12 @@ namespace PostMessageExp
         /// <param name="command">Command.</param>
         void EvaluateJavascript(String command);
 
+
+        /// <summary>
+        /// Initialition webview with parameters
+        /// </summary>
+        /// <param name="command">Command.</param>
+        void InitWebView(ConfigurationWebView command);
 
     }
 }

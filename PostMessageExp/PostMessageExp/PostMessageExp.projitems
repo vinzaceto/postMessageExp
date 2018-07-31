@@ -12,10 +12,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Defines\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\CustomWebviewInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\CustomWebviewManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WebView\ConfigurationWebView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Defines\" />
     <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
     <Folder Include="$(MSBuildThisFileDirectory)Managers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\WebView\" />
   </ItemGroup>
 </Project>

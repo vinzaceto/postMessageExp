@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using PostMessageExp.Defines;
+using PostMessageExp.Models.WebView;
 
 namespace PostMessageExp
 {
@@ -7,6 +9,7 @@ namespace PostMessageExp
     {
         private static object lockerInterface = new object();
         private static CustomWebviewInterface interfacesf;
+        private ConfigurationWebView _configurationWebView;
 
 
         /// <summary>
@@ -16,12 +19,14 @@ namespace PostMessageExp
         /// <returns>The configurations.</returns>
         /// <param name="chiaveServizio">Chiave servizio.</param>
         /// <param name="codiceFornitura">Codice fornitura.</param>
-        static public async Task GetConfigurations(string chiaveServizio, string codiceFornitura)
+        public async Task GetConfigurations(string chiaveServizio, string codiceFornitura)
         {
             try
             {
-               //TODO
-              
+                //TODO call service to get webview url
+
+                _configurationWebView = new ConfigurationWebView(Constants.DEMO_URL);
+                GetIntInstance().InitWebView(_configurationWebView);
             }
             catch (Exception ex)
             {
