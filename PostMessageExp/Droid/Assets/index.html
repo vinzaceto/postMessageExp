@@ -1,114 +1,87 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>iframe Window</title>
-    <style>
-        body {
-            background-color: #D53C2F;
-            color: white;
-        }
-    </style>
+    <title>Comunicazione Post Message iOS</title>
 </head>
 <body>
+    <form id="form">
+        <input type="text" placeholder="Enter message" name="message">
+        <input type="submit" value="Click to send">
+    </form>
+    <script>//Register to eventListener (For Test)
+window.addEventListener('message', function(event) {
 
-<form id="form">
-    <input type="text" placeholder="Enter message" name="message">
-    <input type="submit" value="Click to send">
-</form>
+            var messageToJson = {
+                MESSAGE: {
+                    MESSAGE_TYPE: "STRING",
+                    REQUEST_ACTION: "STRING",
+                    FLOW_DATA: {
+                        ID_PROCESSO: "STRING",
+                        NOME_PROCESSO: "STRING",
+                        ESITO: "STRING",
+                        CODICE_ESITO: "STRING",
+                        TIPOLOGIA_ESITO: "STRING"
 
-  <script>window.addEventListener('message', function(event) {
+                    },
+                    TRACKING_ANALYTICS: {
+                        LIVELLO2: "STRING",
+                        LIVELLO3: "STRING"
+                    }
+                }
+            };
 
-          var messageToJson = {
-              MESSAGE: {
-                  MESSAGE_TYPE: "STRING",
-                  REQUEST_ACTION: "STRING",
-                  FLOW_DATA: {
-                      ID_PROCESSO: "STRING",
-                      NOME_PROCESSO: "STRING",
-                      ESITO: "STRING",
-                      CODICE_ESITO: "STRING",
-                      TIPOLOGIA_ESITO: "STRING"
+            //Send json to App
+            sendToApp(JSON.stringify(messageToJson));
 
-                  },
-                  TRACKING_ANALYTICS: {
-                      LIVELLO2: "STRING",
-                      LIVELLO3: "STRING"
-                  }
-              }
-          };
-
-          sendToApp(JSON.stringify(messageToJson));
-
-          alert(`Received ${event.data} from ${event.origin}`);
-
+            alert(`Received ${event.data} from ${event.origin}`);
 });
 
+//Register form to onsubmit event (For Test)
 form.onsubmit = function() {
-          window.postMessage(this.message.value, '*');
-          return false;
+            window.postMessage(this.message.value, '*');
+            return false;
 };
 
 function sendToApp(messageBody) {
-          // this must be used to call the interface to communicate with native side
-          MyJSInterface.messageJson(JSON.stringify(messageBody));
+            if (iOS()) {
+                // this must be used to call the WkWebView message handler
+                window.webkit.messageHandlers.sendToApp.postMessage(messageBody);
+            }
+            else if (isAndroid()) {
+                // this must be used to call the interface to communicate with native side
+                MyJSInterface.sendToApp(JSON.stringify(messageBody));
+            }
 }
 
 function sendToWebviewContainer(json) {
-          window.postMessage(json, '*');
-}</script>
-</body>
-</html>
+            window.postMessage(json, '*');
+}
 
-<script>window.addEventListener('message', function (event) {
+function iOS() {
 
-    var messageToJson = {
-        MESSAGE: {
-            MESSAGE_TYPE: "STRING",
-            REQUEST_ACTION: "STRING",
-            FLOW_DATA: {
-                ID_PROCESSO: "STRING",
-                NOME_PROCESSO: "STRING",
-                ESITO: "STRING",
-                CODICE_ESITO: "STRING",
-                TIPOLOGIA_ESITO: "STRING"
+            var iDevices = [
+                'iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+            ];
 
-            },
-            TRACKING_ANALYTICS: {
-                LIVELLO2: "STRING",
-                LIVELLO3: "STRING"
+            if (!!navigator.platform) {
+                while (iDevices.length) {
+                    if (navigator.platform === iDevices.pop()) {
+                        return true;
+                    }
+                }
             }
-        }
-    };
 
-    sendToApp(JSON.stringify(messageToJson));
-
-    alert(`Received ${event.data} from ${event.origin}`);
-
-});
-
-form.onsubmit = function () {
-    window.postMessage(this.message.value, '*');
-    return false;
-};
-
-function sendToApp(messageBody) {
-    if (iOS()) {
-        // this must be used to call the WkWebView message handler
-        window.webkit.messageHandlers.sendToApp.postMessage(messageBody);
-    }
-    else if (isAndroid()) {
-        // this must be used to call the interface to communicate with native side
-        MyJSInterface.messageJson(JSON.stringify(messageBody));
-    }
+            return false;
 }
 
 function isAndroid() {
-    var ua = navigator.userAgent.toLowerCase();
-    return  ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-}
-
-function sendToWebviewContainer(json) {
-    window.postMessage(json, '*');
-}
-
-</script>
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+}</script>
+</body>
+</html>
