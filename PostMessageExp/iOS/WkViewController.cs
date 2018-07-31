@@ -97,6 +97,11 @@ namespace PostMessageExp.iOS
       wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonStringToSend), null);
     }
 
+    public void SendToContainer(string json)
+    {
+      wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", json), null);
+    }
+
     public void InitWebView(ConfigurationWebView command)
     {
       this.url = command.URL;
