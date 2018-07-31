@@ -31,6 +31,5 @@ namespace PostMessageExp
         /// </summary>
         /// <param name="command">Command.</param>
         void InitWebView(ConfigurationWebView command);
-
     }
 }
