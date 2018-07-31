@@ -12,12 +12,10 @@ namespace PostMessageExp.iOS
   public partial class WkViewController : UIViewController, CustomWebviewInterface
   {
     private const string jsonStringToSend = "{\"employees\": [{ \"firstName\":\"John\", \"lastName\":\"Doe\" }, { \"firstName\":\"Anna\" , \"lastName\":\"Smith\" },{ \"firstName\": \"Peter\" , \"lastName\": \"Jones \" }]}";
-    
-    private const string jsonToInitProcess = "{\"MESSAGE\":{\"MESSAGE_TYPE\":\" PMBridge \",\"REQUEST_ACTION\":\"startProcess\",\"FLOW_DATA\":{\"ID_PROCESSO\":\"STRING\",\"NOME_PROCESSO\":\"STRING\",\"ESITO\":\"OK\",\"CODICE_ESITO\":\"STRING\",\"TIPOLOGIA_ESITO\":\"tecnico\"}}}";
 
     private WKWebView wkWebview;
-
     public string url;
+    private CustomWebviewManager _webViewManager;
 
     public WkViewController(IntPtr handle) : base(handle)
     {
@@ -53,9 +51,9 @@ namespace PostMessageExp.iOS
 
     private async Task SetManager()
     {
-		  CustomWebviewManager manager = new CustomWebviewManager();
-      manager.SetIntInstance(this);
-      manager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
+		  _webViewManager = new CustomWebviewManager();
+      _webViewManager.SetIntInstance(this);
+      _webViewManager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
     }
 
     private void LoadHtml()
@@ -74,7 +72,7 @@ namespace PostMessageExp.iOS
     {
       // TODO: stop the loader and send the JSON of the init     
       System.Diagnostics.Debug.WriteLine("pagina caricata");
-      wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonToInitProcess), null);
+      _webViewManager.SendToContainer();
     }
 
     partial void buttonAction(UIButton sender)
