@@ -50,7 +50,7 @@ form.onsubmit = function() {
 
 function sendToApp(messageBody) {
           // this must be used to call the interface to communicate with native side
-          MyJSInterface.messageJson(JSON.stringify(messageBody));
+          MyJSInterface.sendToApp(JSON.stringify(messageBody));
 }
 
 function sendToWebviewContainer(json) {
