@@ -39,6 +39,9 @@ namespace PostMessageExp.iOS
       var wkUIDelegate = new PostMessageWkWebViewDelegate();
       wkUIDelegate.parentController = this;
       wkWebview.UIDelegate = wkUIDelegate;
+      
+      var navigationDelegate = new PostMessageNavigationDelegate();
+      wkWebview.NavigationDelegate = navigationDelegate;
 
       //LoadHtml();
       
@@ -115,6 +118,14 @@ namespace PostMessageExp.iOS
         var arguments = message.Body;
         System.Diagnostics.Debug.WriteLine("Contenuto arrivato " + arguments);
       }
+    }
+  }
+
+  public class PostMessageNavigationDelegate : WKNavigationDelegate
+  {
+    public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
+    {
+      System.Diagnostics.Debug.WriteLine("Web view page has been loaded");
     }
   }
 }
