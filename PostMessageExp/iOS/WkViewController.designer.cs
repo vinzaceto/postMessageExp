@@ -20,17 +20,20 @@ namespace PostMessageExp.iOS
 
 		[Action ("buttonAction:")]
 		partial void buttonAction (UIKit.UIButton sender);
+
+		[Action ("CloseMe:")]
+		partial void CloseMe (UIKit.UIButton sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (webViewContainer != null) {
-				webViewContainer.Dispose ();
-				webViewContainer = null;
-			}
-
 			if (webView != null) {
 				webView.Dispose ();
 				webView = null;
+			}
+
+			if (webViewContainer != null) {
+				webViewContainer.Dispose ();
+				webViewContainer = null;
 			}
 		}
 	}

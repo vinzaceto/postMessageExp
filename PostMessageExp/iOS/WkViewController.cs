@@ -13,7 +13,21 @@ namespace PostMessageExp.iOS
   {
     private const string jsonStringToSend = "{\"employees\": [{ \"firstName\":\"John\", \"lastName\":\"Doe\" }, { \"firstName\":\"Anna\" , \"lastName\":\"Smith\" },{ \"firstName\": \"Peter\" , \"lastName\": \"Jones \" }]}";
 
-    private WKWebView wkWebview;
+    WeakReference<WKWebView> _pageReference;
+    private WKWebView wkWebview
+    {
+      get
+      {
+        WKWebView _page = null;
+        _pageReference.TryGetTarget(out _page);
+        return _page;
+      }
+      set
+      {
+        _pageReference = new WeakReference<WKWebView>(value);
+      }
+    }
+    
     public string url;
     private CustomWebviewManager _webViewManager;
 
@@ -38,13 +52,11 @@ namespace PostMessageExp.iOS
       webViewContainer.AddSubview(wkWebview);
 
       var wkUIDelegate = new PostMessageWkWebViewDelegate();
-      wkUIDelegate.parentController = this;
+      wkUIDelegate.ParentController = this;
       wkWebview.UIDelegate = wkUIDelegate;
       
       var navigationDelegate = new PostMessageNavigationDelegate();
       wkWebview.NavigationDelegate = navigationDelegate;
-
-      //LoadHtml();
       
       await SetManager();
     }
@@ -53,7 +65,8 @@ namespace PostMessageExp.iOS
     {
 		  _webViewManager = new CustomWebviewManager();
       _webViewManager.SetIntInstance(this);
-      _webViewManager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
+      var container = new ContainerWebView();
+      _webViewManager.GetConfigurations(container);
     }
 
     private void LoadHtml()
@@ -65,7 +78,7 @@ namespace PostMessageExp.iOS
       var url = new NSUrl(localHtmlUrl, false);
       
       var url2 = new NSUrl(remoteUrl);
-      wkWebview.LoadRequest(new NSUrlRequest(url));
+      wkWebview.LoadRequest(new NSUrlRequest(url2));
     }
 
     public void PageHasBeenLoaded()
@@ -106,15 +119,41 @@ namespace PostMessageExp.iOS
       LoadHtml();
     }
 
-    private void StartWebProcess()
+    partial void CloseMe(UIButton sender)
     {
+      wkWebview.RemoveFromSuperview();
+      wkWebview.Dispose();
+      wkWebview = null;
       
+      _webViewManager = null;
+      
+      DismissViewController(true, null);
+    }
+
+    // Questo deve essere sempre chiamato se l'oggetto e' distrutto
+    protected override void Dispose(bool disposing)
+    {
+      base.Dispose(disposing);
+      Console.WriteLine("WkWebViewController has been disposed");
     }
   }
 
   public class PostMessageWkWebViewDelegate : WKUIDelegate
   {
-    public UIViewController parentController;
+    WeakReference<UIViewController> _pageReference;
+    public UIViewController ParentController
+    {
+      get
+      {
+        UIViewController _page = null;
+        _pageReference.TryGetTarget(out _page);
+        return _page;
+      }
+      set
+      {
+        _pageReference = new WeakReference<UIViewController>(value);
+      }
+    }
 
     public override void RunJavaScriptAlertPanel(WKWebView webView, string message, WKFrameInfo frame, Action completionHandler)
     {
@@ -122,7 +161,7 @@ namespace PostMessageExp.iOS
       alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
       // Let javascript handle the OK click by passing the completionHandler to the controller
-      parentController.PresentViewController(alert, true, completionHandler);
+      ParentController.PresentViewController(alert, true, completionHandler);
     }
   }
 
