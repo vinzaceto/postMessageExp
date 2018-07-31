@@ -20,19 +20,18 @@ namespace PostMessageExp
         /// <returns>The configurations.</returns>
         /// <param name="chiaveServizio">Chiave servizio.</param>
         /// <param name="codiceFornitura">Codice fornitura.</param>
-        public async Task GetConfigurations(string chiaveServizio, string codiceFornitura)
+        public async Task GetConfigurations(ContainerWebView container)
         {
             try
             {
                 //TODO call service to get webview url
-
                 _configurationWebView = new ConfigurationWebView(Constants.DEMO_URL);
                 GetIntInstance().InitWebView(_configurationWebView);
             }
             catch (Exception ex)
             {
-               //TODO ADD LOGMANAGER
-            }           
+                //TODO ADD LOGMANAGER
+            }
         }
 
         #region PROPERTIES
@@ -53,9 +52,12 @@ namespace PostMessageExp
         }
         #endregion
 
+        #region Communication Channel
         public void SendToContainer()
         {
             GetIntInstance().SendToContainer(jsonToInitProcess);
         }
+
+        #endregion
     }
 }
