@@ -80,7 +80,7 @@
     <AndroidResource Include="Resources\layout\Loader.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\index.html" />
+    <AndroidAsset Include="Assets\postMessageIndex.html" />
   </ItemGroup>
   <Import Project="..\PostMessageExp\PostMessageExp.projitems" Label="Shared" Condition="Exists('..\PostMessageExp\PostMessageExp.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
