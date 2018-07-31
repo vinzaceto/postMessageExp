@@ -85,7 +85,7 @@ namespace PostMessageExp.iOS
     {
       // TODO: stop the loader and send the JSON of the init     
       System.Diagnostics.Debug.WriteLine("pagina caricata");
-      _webViewManager.SendToContainer();
+      _webViewManager.SendInitContainer();
     }
 
     partial void buttonAction(UIButton sender)

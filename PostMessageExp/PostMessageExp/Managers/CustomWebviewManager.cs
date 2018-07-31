@@ -75,8 +75,7 @@ namespace PostMessageExp
         private string CreateInitContainerRequest()
         {
             var content = JsonConvert.SerializeObject(_container, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            string jsonRequest = string.Format("javascript:initContainer('{0}')", content);           
-            return jsonRequest;
+            return content;
         }
         #endregion      
     }
