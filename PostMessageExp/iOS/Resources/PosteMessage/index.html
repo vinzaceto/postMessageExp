@@ -14,47 +14,82 @@
     //Register to eventListener (For Test)
     window.addEventListener('message', function (event) {
 
-    var messageToJson = {
-        MESSAGE : {
-            MESSAGE_TYPE: "STRING",
-            REQUEST_ACTION: "STRING",
-            FLOW_DATA: {
-                ID_PROCESSO: "STRING",
-                NOME_PROCESSO: "STRING",
-                ESITO: "STRING",
-                CODICE_ESITO: "STRING",
-                TIPOLOGIA_ESITO: "STRING"
+        var messageToJson = {
+            MESSAGE: {
+                MESSAGE_TYPE: "STRING",
+                REQUEST_ACTION: "STRING",
+                FLOW_DATA: {
+                    ID_PROCESSO: "STRING",
+                    NOME_PROCESSO: "STRING",
+                    ESITO: "STRING",
+                    CODICE_ESITO: "STRING",
+                    TIPOLOGIA_ESITO: "STRING"
 
-            },
-            TRACKING_ANALYTICS: {
-                LIVELLO2: "STRING",
-                LIVELLO3: "STRING"
+                },
+                TRACKING_ANALYTICS: {
+                    LIVELLO2: "STRING",
+                    LIVELLO3: "STRING"
+                }
             }
-        }
-    };
+        };
 
-    window.location = "postMesssageIsCalling://" + JSON.stringify(messageToJson);
-    //Send json to App
-    sendToApp(JSON.stringify(messageToJson));
+        window.location = "postMesssageIsCalling://" + JSON.stringify(messageToJson);
+        //Send json to App
+        sendToApp(JSON.stringify(messageToJson));
 
-    alert(`Received ${event.data} from ${event.origin}`);
-});
+        alert(`Received ${event.data} from ${event.origin}`);
+    });
 
     //Register form to onsubmit event (For Test)
-  form.onsubmit = function () {
-    window.postMessage(this.message.value, '*');
-    return false;
-};
+    form.onsubmit = function () {
+        window.postMessage(this.message.value, '*');
+        return false;
+    };
 
-function sendToApp(messageBody)
-{
-    // this must be used to call the WkWebView message handler
-    window.webkit.messageHandlers.sendToApp.postMessage(messageBody);
-}
+    function sendToApp(messageBody) {
+        if (iOS())
+        {
+            // this must be used to call the WkWebView message handler
+            window.webkit.messageHandlers.sendToApp.postMessage(messageBody);
+        }
+        else if (isAndroid())
+        {
+            // this must be used to call the interface to communicate with native side
+            MyJSInterface.messageJson(JSON.stringify(messageBody));
+        }
+    }
 
-function sendToWebviewContainer(json) {
-    window.postMessage(json, '*');
-}
+    function sendToWebviewContainer(json) {
+        window.postMessage(json, '*');
+    }
+
+    function iOS() {
+
+        var iDevices = [
+            'iPad Simulator',
+            'iPhone Simulator',
+            'iPod Simulator',
+            'iPad',
+            'iPhone',
+            'iPod'
+        ];
+
+        if (!!navigator.platform) {
+            while (iDevices.length) {
+                if (navigator.platform === iDevices.pop()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    
+    function isAndroid() {
+        var ua = navigator.userAgent.toLowerCase();
+        return  ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+    }
+    
 </script>
 </body>
 </html>
