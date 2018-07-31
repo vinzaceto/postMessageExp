@@ -50,7 +50,7 @@ namespace PostMessageExp.Droid
 
         private void LoadHtml()
         {
-            webView.LoadUrl("file:///android_asset/index.html");
+            webView.LoadUrl("http://www.digitalentitypreview.com/mobileapp/enel/enelenergia/R3/DEMO/postMessageIndex.html");
         }
 
         public void showLoader(bool show)
