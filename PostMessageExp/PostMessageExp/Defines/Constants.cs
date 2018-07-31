@@ -4,6 +4,7 @@ namespace PostMessageExp.Defines
     public static class Constants
     {
         // ACTION CONSTANTS CUSTOM WEBVIEW
+        public const string REQUEST_ACTION_INIT_CONTAINER = "initContainer";
         public const string REQUEST_ACTION_ABORT_PROCESS = "abortProcess";
         public const string REQUEST_ACTION_START_LOADING = "startLoading";
         public const string REQUEST_ACTION_STOP_LOADING = "stopLoading";
