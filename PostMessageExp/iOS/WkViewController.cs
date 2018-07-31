@@ -24,7 +24,7 @@ namespace PostMessageExp.iOS
       var scriptDelegate = new WkPostMessageScriptMessageHandler();
 
       WKUserContentController contentController = new WKUserContentController();
-            contentController.AddScriptMessageHandler(scriptDelegate, "sendToApp");
+      contentController.AddScriptMessageHandler(scriptDelegate, "sendToApp");
 
       WKWebViewConfiguration config = new WKWebViewConfiguration();
       config.UserContentController = contentController;
@@ -43,14 +43,17 @@ namespace PostMessageExp.iOS
     {
       string fileName = "PosteMessage/index"; // remember case-sensitive
       string localHtmlUrl = NSBundle.MainBundle.PathForResource(fileName, "html");
-      var url = new NSUrl(localHtmlUrl, false);
-      wkWebview.LoadRequest(new NSUrlRequest(url));
-    }
 
+      string remoteUrl = "http://www.digitalentitypreview.com/mobileapp/enel/enelenergia/R3/DEMO/postMessageIndex.html";
+      var url = new NSUrl(localHtmlUrl, false);
+      
+      var url2 = new NSUrl(remoteUrl);
+      wkWebview.LoadRequest(new NSUrlRequest(url2));
+    }
 
     partial void buttonAction(UIButton sender)
     {
-            wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonStringToSend), null);
+      wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonStringToSend), null);
     }
   }
 
@@ -72,7 +75,7 @@ namespace PostMessageExp.iOS
   {
     public override void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
     {
-            if (message.Name == "sendToApp")
+      if (message.Name == "sendToApp")
       {
         var arguments = message.Body;
         System.Diagnostics.Debug.WriteLine("Contenuto arrivato " + arguments);
