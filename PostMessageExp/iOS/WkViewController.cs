@@ -14,8 +14,8 @@ namespace PostMessageExp.iOS
     private const string jsonStringToSend = "{\"employees\": [{ \"firstName\":\"John\", \"lastName\":\"Doe\" }, { \"firstName\":\"Anna\" , \"lastName\":\"Smith\" },{ \"firstName\": \"Peter\" , \"lastName\": \"Jones \" }]}";
 
     private WKWebView wkWebview;
-
     public string url;
+    private CustomWebviewManager _webViewManager;
 
     public WkViewController(IntPtr handle) : base(handle)
     {
@@ -25,7 +25,7 @@ namespace PostMessageExp.iOS
     {
       base.ViewDidLoad();
 
-      var scriptDelegate = new WkPostMessageScriptMessageHandler();
+      var scriptDelegate = new WkPostMessageScriptMessageHandler(this);
 
       WKUserContentController contentController = new WKUserContentController();
       contentController.AddScriptMessageHandler(scriptDelegate, "sendToApp");
@@ -51,9 +51,9 @@ namespace PostMessageExp.iOS
 
     private async Task SetManager()
     {
-		  CustomWebviewManager manager = new CustomWebviewManager();
-      manager.SetIntInstance(this);
-      manager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
+		  _webViewManager = new CustomWebviewManager();
+      _webViewManager.SetIntInstance(this);
+      _webViewManager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
     }
 
     private void LoadHtml()
@@ -66,6 +66,13 @@ namespace PostMessageExp.iOS
       
       var url2 = new NSUrl(remoteUrl);
       wkWebview.LoadRequest(new NSUrlRequest(url));
+    }
+
+    public void PageHasBeenLoaded()
+    {
+      // TODO: stop the loader and send the JSON of the init     
+      System.Diagnostics.Debug.WriteLine("pagina caricata");
+      _webViewManager.SendToContainer();
     }
 
     partial void buttonAction(UIButton sender)
@@ -88,10 +95,20 @@ namespace PostMessageExp.iOS
       wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonStringToSend), null);
     }
 
+    public void SendToContainer(string json)
+    {
+      wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", json), null);
+    }
+
     public void InitWebView(ConfigurationWebView command)
     {
       this.url = command.URL;
       LoadHtml();
+    }
+
+    private void StartWebProcess()
+    {
+      
     }
   }
 
@@ -104,14 +121,32 @@ namespace PostMessageExp.iOS
       var alert = UIAlertController.Create("Alert", message, UIAlertControllerStyle.Alert);
       alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
-      //Let javascript handle the OK click by passing the completionHandler to the controller
+      // Let javascript handle the OK click by passing the completionHandler to the controller
       parentController.PresentViewController(alert, true, completionHandler);
     }
   }
 
   public class WkPostMessageScriptMessageHandler : WKScriptMessageHandler
   {
-    
+    WeakReference<WkViewController> _pageReference;
+    public WkViewController FatherVC
+    {
+      get
+      {
+        WkViewController _page = null;
+        _pageReference.TryGetTarget(out _page);
+        return _page;
+      }
+      set
+      {
+        _pageReference = new WeakReference<WkViewController>(value);
+      }
+    }
+
+    public WkPostMessageScriptMessageHandler(WkViewController parent)
+    {
+      FatherVC = parent;
+    }
     
     public override void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
     {
@@ -122,7 +157,7 @@ namespace PostMessageExp.iOS
       }
       else if (message.Name == "onHtmlLoadCompleted")
       {
-        System.Diagnostics.Debug.WriteLine("pagina caricata");
+        FatherVC.PageHasBeenLoaded();
       }
     }
   }

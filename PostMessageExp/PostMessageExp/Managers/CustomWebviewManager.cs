@@ -10,6 +10,8 @@ namespace PostMessageExp
         private static object lockerInterface = new object();
         private static CustomWebviewInterface interfacesf;
         private ConfigurationWebView _configurationWebView;
+        
+        private const string jsonToInitProcess = "{\"MESSAGE\":{\"MESSAGE_TYPE\":\" PMBridge \",\"REQUEST_ACTION\":\"startProcess\",\"FLOW_DATA\":{\"ID_PROCESSO\":\"STRING\",\"NOME_PROCESSO\":\"STRING\",\"ESITO\":\"OK\",\"CODICE_ESITO\":\"STRING\",\"TIPOLOGIA_ESITO\":\"tecnico\"}}}";
 
         /// <summary>
         /// Metodo di utilità che invocando il servizio BE rotprnerà i parametri di configurazione webview 
@@ -53,7 +55,7 @@ namespace PostMessageExp
         #region Communication Channel
         public void SendToContainer()
         {
-            GetIntInstance().SendToContainer("asdf");
+            GetIntInstance().SendToContainer(jsonToInitProcess);
         }
 
         #endregion
