@@ -38,18 +38,7 @@ namespace PostMessageExp.Droid
 
             if (messageJson != null)
             {
-                if (messageJson.message.Equals("stopLoading"))
-                {
-                    showLoader(false);
-                }
-                else if (messageJson.message.Equals("startLoading"))
-                {
-                    showLoader(true);
-                }
-                else
-                {
                     _activity.OnCallBackJS(messageJson);
-                }
             }
         }
 

@@ -50,8 +50,20 @@ namespace PostMessageExp.Droid
 
         internal void OnCallBackJS(MessageJson messageJson)
         {
-            if (messageJson.message.RequestAction.Equals("stopLoading")){
-                
+            if (messageJson != null)
+            {
+                if (messageJson.message.RequestAction.Equals("stopLoading"))
+                {
+                    ShowLoader(false, 0);
+                }
+                else if (messageJson.message.RequestAction.Equals("startLoading"))
+                {
+                    ShowLoader(true, 0);
+                }
+                else
+                {
+                    //TODO
+                }
             }
         }
 
