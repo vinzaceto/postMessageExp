@@ -6,9 +6,9 @@ namespace PostMessageExp.Droid
     
     public class JSI : Java.Lang.Object
     {
-        MainActivity _activity;
+        WebviewActivity _activity;
 
-        public JSI(MainActivity activity)
+        public JSI(WebviewActivity activity)
         {
             _activity = activity;
         }
@@ -25,7 +25,7 @@ namespace PostMessageExp.Droid
         public void showLoader(bool show)
         {
             if (_activity != null) {
-                _activity.showLoader(show);
+                _activity.ShowLoader(show,1);
             }
         }
 
@@ -33,8 +33,17 @@ namespace PostMessageExp.Droid
         [JavascriptInterface]
         public void sendToApp(string show)
         {
-            System.Diagnostics.Debug.WriteLine(show);
+            if(show.Equals("sendToApp")){
+                _activity.ShowDialog(true, show);
+            }
         }
+
+        [Export]
+        [JavascriptInterface]
+        public void OnHtmlLoadCompleted()
+        {
+            _activity.OnHtmlLoadCompletedCAllBack();
+        }   
 
     }
 }

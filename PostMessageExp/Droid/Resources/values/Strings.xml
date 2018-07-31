@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Click Me!</string>
+    <string name="hello">Hello, Click Me to start WebView!</string>
+    <string name="click_me_webview">Click Me to send a json to webview</string>
+
     <string name="app_name">PostMessageExp.Droid</string>
 </resources>
