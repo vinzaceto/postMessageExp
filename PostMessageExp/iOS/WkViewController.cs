@@ -12,6 +12,8 @@ namespace PostMessageExp.iOS
   public partial class WkViewController : UIViewController, CustomWebviewInterface
   {
     private const string jsonStringToSend = "{\"employees\": [{ \"firstName\":\"John\", \"lastName\":\"Doe\" }, { \"firstName\":\"Anna\" , \"lastName\":\"Smith\" },{ \"firstName\": \"Peter\" , \"lastName\": \"Jones \" }]}";
+    
+    private const string jsonToInitProcess = "{\"MESSAGE\":{\"MESSAGE_TYPE\":\" PMBridge \",\"REQUEST_ACTION\":\"startProcess\",\"FLOW_DATA\":{\"ID_PROCESSO\":\"STRING\",\"NOME_PROCESSO\":\"STRING\",\"ESITO\":\"OK\",\"CODICE_ESITO\":\"STRING\",\"TIPOLOGIA_ESITO\":\"tecnico\"}}}";
 
     private WKWebView wkWebview;
 
@@ -25,7 +27,7 @@ namespace PostMessageExp.iOS
     {
       base.ViewDidLoad();
 
-      var scriptDelegate = new WkPostMessageScriptMessageHandler();
+      var scriptDelegate = new WkPostMessageScriptMessageHandler(this);
 
       WKUserContentController contentController = new WKUserContentController();
       contentController.AddScriptMessageHandler(scriptDelegate, "sendToApp");
@@ -68,6 +70,13 @@ namespace PostMessageExp.iOS
       wkWebview.LoadRequest(new NSUrlRequest(url));
     }
 
+    public void PageHasBeenLoaded()
+    {
+      // TODO: stop the loader and send the JSON of the init     
+      System.Diagnostics.Debug.WriteLine("pagina caricata");
+      wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonToInitProcess), null);
+    }
+
     partial void buttonAction(UIButton sender)
     {
       this.EvaluateJavascript("non usato per ora");
@@ -93,6 +102,11 @@ namespace PostMessageExp.iOS
       this.url = command.URL;
       LoadHtml();
     }
+
+    private void StartWebProcess()
+    {
+      
+    }
   }
 
   public class PostMessageWkWebViewDelegate : WKUIDelegate
@@ -104,14 +118,32 @@ namespace PostMessageExp.iOS
       var alert = UIAlertController.Create("Alert", message, UIAlertControllerStyle.Alert);
       alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
-      //Let javascript handle the OK click by passing the completionHandler to the controller
+      // Let javascript handle the OK click by passing the completionHandler to the controller
       parentController.PresentViewController(alert, true, completionHandler);
     }
   }
 
   public class WkPostMessageScriptMessageHandler : WKScriptMessageHandler
   {
-    
+    WeakReference<WkViewController> _pageReference;
+    public WkViewController FatherVC
+    {
+      get
+      {
+        WkViewController _page = null;
+        _pageReference.TryGetTarget(out _page);
+        return _page;
+      }
+      set
+      {
+        _pageReference = new WeakReference<WkViewController>(value);
+      }
+    }
+
+    public WkPostMessageScriptMessageHandler(WkViewController parent)
+    {
+      FatherVC = parent;
+    }
     
     public override void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
     {
@@ -122,7 +154,7 @@ namespace PostMessageExp.iOS
       }
       else if (message.Name == "onHtmlLoadCompleted")
       {
-        System.Diagnostics.Debug.WriteLine("pagina caricata");
+        FatherVC.PageHasBeenLoaded();
       }
     }
   }
