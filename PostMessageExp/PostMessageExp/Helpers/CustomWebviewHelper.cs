@@ -61,5 +61,19 @@ namespace PostMessageExp.Helpers
             }
             return result;
         }
+        
+        public static MessageJson JsonToModelIOS(string json)
+        {
+            MessageJson result = null;
+            try
+            {
+                result = JsonConvert.DeserializeObject<MessageJson>(json);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("JsonToModel - Errore di Deserializzazione [" + json + "] " + e.Message);
+            }
+            return result;
+        }
     }
 }

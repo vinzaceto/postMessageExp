@@ -3,6 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using Foundation;
+using PostMessageExp.Helpers;
 using PostMessageExp.Models.WebView;
 using UIKit;
 using WebKit;
@@ -203,8 +204,9 @@ namespace PostMessageExp.iOS
       {
         var arguments = message.Body;
         System.Diagnostics.Debug.WriteLine("Contenuto arrivato " + arguments);
-
-        if (arguments.ToString().Contains("stopLoading"))
+        
+        var model = CustomWebviewHelper.JsonToModelIOS(arguments.ToString());
+        if (model.message.RequestAction == "stopLoading")
         {
           FatherVC.ShowLoader(IsVisible: false, timeout: 10);
         }
