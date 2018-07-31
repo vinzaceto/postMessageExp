@@ -29,6 +29,7 @@ namespace PostMessageExp.iOS
 
       WKUserContentController contentController = new WKUserContentController();
       contentController.AddScriptMessageHandler(scriptDelegate, "sendToApp");
+      contentController.AddScriptMessageHandler(scriptDelegate, "onHtmlLoadCompleted");
 
       WKWebViewConfiguration config = new WKWebViewConfiguration();
       config.UserContentController = contentController;
@@ -64,7 +65,7 @@ namespace PostMessageExp.iOS
       var url = new NSUrl(localHtmlUrl, false);
       
       var url2 = new NSUrl(remoteUrl);
-      wkWebview.LoadRequest(new NSUrlRequest(url2));
+      wkWebview.LoadRequest(new NSUrlRequest(url));
     }
 
     partial void buttonAction(UIButton sender)
@@ -84,7 +85,6 @@ namespace PostMessageExp.iOS
 
     public void EvaluateJavascript(String command)
     {
-      
       wkWebview.EvaluateJavaScript(string.Format("sendToWebviewContainer('{0}');", jsonStringToSend), null);
     }
 
@@ -111,12 +111,18 @@ namespace PostMessageExp.iOS
 
   public class WkPostMessageScriptMessageHandler : WKScriptMessageHandler
   {
+    
+    
     public override void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
     {
       if (message.Name == "sendToApp")
       {
         var arguments = message.Body;
         System.Diagnostics.Debug.WriteLine("Contenuto arrivato " + arguments);
+      }
+      else if (message.Name == "onHtmlLoadCompleted")
+      {
+        System.Diagnostics.Debug.WriteLine("pagina caricata");
       }
     }
   }

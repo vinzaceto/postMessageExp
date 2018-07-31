@@ -11,7 +11,6 @@ namespace PostMessageExp
         private static CustomWebviewInterface interfacesf;
         private ConfigurationWebView _configurationWebView;
 
-
         /// <summary>
         /// Metodo di utilità che invocando il servizio BE rotprnerà i parametri di configurazione webview 
         /// tra i quali anche l'url da passare alla pagina
@@ -34,7 +33,6 @@ namespace PostMessageExp
             }           
         }
 
-
         #region PROPERTIES
         public CustomWebviewInterface GetIntInstance()
         {
@@ -53,7 +51,4 @@ namespace PostMessageExp
         }
         #endregion
     }
-
-
-  
 }

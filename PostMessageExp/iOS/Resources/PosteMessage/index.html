@@ -3,7 +3,7 @@
 <head>
     <title>Comunicazione Post Message iOS</title>
 </head>
-<body>
+<body onload='onLoadPageCompleted();'>
 
 <form id="form">
     <input type="text" placeholder="Enter message" name="message">
@@ -11,6 +11,20 @@
 </form>
 
 <script>
+    
+    function onLoadPageCompleted()
+    {
+        if (isAndroid())    
+        {
+            MyJSInterface.OnHtmlLoadCompleted();
+        }
+        else if (iOS())
+        {
+            // this must be used to call the WkWebView message handler
+            window.webkit.messageHandlers.onHtmlLoadCompleted.postMessage("");
+        }
+    }
+    
     //Register to eventListener (For Test)
     window.addEventListener('message', function (event) {
 
