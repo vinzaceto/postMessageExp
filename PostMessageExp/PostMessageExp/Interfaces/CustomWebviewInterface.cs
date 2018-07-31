@@ -32,6 +32,10 @@ namespace PostMessageExp
         /// <param name="command">Command.</param>
         void InitWebView(ConfigurationWebView command);
 
+        /// <summary>
+        /// Sends to container a json request.
+        /// </summary>
+        /// <param name="json">Json.</param>
         void SendToContainer(string json);
     }
 }

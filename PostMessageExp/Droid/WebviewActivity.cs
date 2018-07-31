@@ -58,7 +58,8 @@ namespace PostMessageExp.Droid
         {
             _manager = new CustomWebviewManager();
             _manager.SetIntInstance(this);
-            _manager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
+            var container = new ContainerWebView();
+            _manager.GetConfigurations(container);
         }
 
 
