@@ -50,5 +50,10 @@ namespace PostMessageExp
             }
         }
         #endregion
+
+        public void SendToContainer()
+        {
+            GetIntInstance().SendToContainer("asdf");
+        }
     }
 }

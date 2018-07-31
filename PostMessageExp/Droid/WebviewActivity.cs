@@ -24,6 +24,7 @@ namespace PostMessageExp.Droid
         WebView webView;
         Dialog dialog;
         Dialog loader;
+        private CustomWebviewManager _manager;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,7 +40,8 @@ namespace PostMessageExp.Droid
             AlertDialog.Builder loaderBuilder = new AlertDialog.Builder(this);
             dialog = loaderBuilder.Create();
 
-            button.Click += delegate {
+            button.Click += delegate
+            {
                 EvaluateJavascript(jsonStringToSend);
             };
 
@@ -48,27 +50,32 @@ namespace PostMessageExp.Droid
 
         internal void OnHtmlLoadCompletedCAllBack()
         {
-            
+            //Send InitContainer request
+            _manager.SendToContainer();
         }
 
         private async Task SetManager()
         {
-            CustomWebviewManager manager = new CustomWebviewManager();
-            manager.SetIntInstance(this);
-            manager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
+            _manager = new CustomWebviewManager();
+            _manager.SetIntInstance(this);
+            _manager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
         }
 
+
+        #region IMPLEMENT CustomWebViewInterface
         public void ShowLoader(bool IsVisible, int timeout)
         {
-            RunOnUiThread(() => {
+            RunOnUiThread(() =>
+            {
                 if (IsVisible) loader.Show();
                 else loader.Dismiss();
-            });        
+            });
         }
 
         public void ShowDialog(bool IsVisible, string message)
         {
-            RunOnUiThread(() => {
+            RunOnUiThread(() =>
+            {
                 if (IsVisible) dialog.Show();
                 else dialog.Dismiss();
                 dialog.SetTitle(message);
@@ -96,5 +103,12 @@ namespace PostMessageExp.Droid
 
             webView.LoadUrl(command.URL);
         }
+
+        public void SendToContainer(string json)
+        {
+            webView.EvaluateJavascript(string.Format("javascript:sendToWebviewContainer('{0}');", json), null);
+        }
+
+        #endregion
     }
 }
