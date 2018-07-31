@@ -14,13 +14,9 @@ namespace PostMessageExp.Models.WebView
        
         public ContainerWebView()
         {
-            
             //TODO Aggiungere alla sessione corrente IdProcesso 
             //SessionManager.Instance.IdProcesso = Guid.NewGuid();
             this.idProcesso = Guid.NewGuid().ToString();
         }
-
-       
     }
-
 }

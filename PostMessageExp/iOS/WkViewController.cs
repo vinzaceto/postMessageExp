@@ -65,7 +65,8 @@ namespace PostMessageExp.iOS
     {
 		  _webViewManager = new CustomWebviewManager();
       _webViewManager.SetIntInstance(this);
-      _webViewManager.GetConfigurations(chiaveServizio: "chaive servizio", codiceFornitura: "codice fornitura");
+      var container = new ContainerWebView();
+      _webViewManager.GetConfigurations(container);
     }
 
     private void LoadHtml()

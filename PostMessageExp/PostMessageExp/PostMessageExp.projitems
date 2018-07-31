@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\CustomWebviewInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\CustomWebviewManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WebView\ConfigurationWebView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WebView\ContainerWebView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Defines\" />
