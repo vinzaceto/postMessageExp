@@ -50,7 +50,9 @@ namespace PostMessageExp.Droid
 
         internal void OnCallBackJS(MessageJson messageJson)
         {
-            throw new NotImplementedException();
+            if (messageJson.message.RequestAction.Equals("stopLoading")){
+                
+            }
         }
 
         internal void OnHtmlLoadCompletedCAllBack()
@@ -112,7 +114,10 @@ namespace PostMessageExp.Droid
 
         public void SendToContainer(string json)
         {
+            RunOnUiThread(() =>
+            {
             webView.EvaluateJavascript(string.Format("javascript:sendToWebviewContainer('{0}');", json), null);
+            });
         }
 
         internal void OnCallBackJS()
