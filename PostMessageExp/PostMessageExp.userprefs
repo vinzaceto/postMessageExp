@@ -1,14 +1,16 @@
 ﻿<Properties StartupConfiguration="{3BD5BA66-EEAB-4609-95F1-0B7E88B17CBE}|Default">
   <MonoDevelop.Ide.ItemProperties.PostMessageExp.Droid PreferredExecutionTarget="Android.Android_Accelerated_x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/WkViewController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PostMessageExp/Managers/CustomWebviewManager.cs">
     <Files>
-      <File FileName="PostMessageExp/Defines/Constants.cs" Line="4" Column="19" />
-      <File FileName="PostMessageExp/Managers/CustomWebviewManager.cs" Line="1" Column="1" />
-      <File FileName="PostMessageExp/Interfaces/CustomWebviewInterface.cs" Line="4" Column="35" />
-      <File FileName="Droid/MainActivity.cs" Line="29" Column="67" />
-      <File FileName="iOS/Resources/PosteMessage/index.html" Line="35" Column="29" />
-      <File FileName="iOS/ViewController.cs" Line="28" Column="62" />
-      <File FileName="iOS/WkViewController.cs" Line="53" Column="51" />
+      <File FileName="PostMessageExp/Defines/Constants.cs" Line="1" Column="1" />
+      <File FileName="PostMessageExp/Managers/CustomWebviewManager.cs" Line="71" Column="38" />
+      <File FileName="PostMessageExp/Interfaces/CustomWebviewInterface.cs" Line="36" Column="46" />
+      <File FileName="Droid/MainActivity.cs" Line="1" Column="1" />
+      <File FileName="iOS/Resources/PosteMessage/index.html" Line="1" Column="1" />
+      <File FileName="iOS/ViewController.cs" Line="28" Column="92" />
+      <File FileName="iOS/WkViewController.cs" Line="1" Column="1" />
+      <File FileName="PostMessageExp/Models/WebView/ContainerWebView.cs" Line="20" Column="55" />
+      <File FileName="Droid/WebviewActivity.cs" Line="62" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

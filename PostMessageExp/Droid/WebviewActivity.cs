@@ -51,7 +51,7 @@ namespace PostMessageExp.Droid
         internal void OnHtmlLoadCompletedCAllBack()
         {
             //Send InitContainer request
-            _manager.SendToContainer();
+            _manager.SendInitContainer();
         }
 
         private async Task SetManager()
