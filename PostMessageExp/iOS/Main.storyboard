@@ -125,12 +125,17 @@
                                     <action selector="CloseMe:" destination="Hez-Ql-BDZ" eventType="touchUpInside" id="LfB-jj-xaF"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="UQR-Pr-0Er">
+                                <rect key="frame" x="177" y="584" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nQy-L8-8QO" firstAttribute="top" secondItem="UdX-J7-xX2" secondAttribute="bottom" id="Mto-AQ-QRg"/>
+                            <constraint firstItem="UQR-Pr-0Er" firstAttribute="top" secondItem="5uc-FY-dcv" secondAttribute="bottom" constant="26" id="Q4R-Uo-Wk4"/>
                             <constraint firstItem="nQy-L8-8QO" firstAttribute="leading" secondItem="LSx-F4-nlt" secondAttribute="leading" id="REd-w1-5r0"/>
                             <constraint firstAttribute="trailing" secondItem="nQy-L8-8QO" secondAttribute="trailing" id="ROn-LN-u7A"/>
+                            <constraint firstItem="UQR-Pr-0Er" firstAttribute="centerX" secondItem="LSx-F4-nlt" secondAttribute="centerX" id="d2Q-7e-z7Y"/>
                             <constraint firstItem="Dmi-2I-X6A" firstAttribute="leading" secondItem="LSx-F4-nlt" secondAttribute="leading" constant="16" id="f7k-bT-Dlc"/>
                             <constraint firstItem="5uc-FY-dcv" firstAttribute="centerX" secondItem="LSx-F4-nlt" secondAttribute="centerX" id="ntF-ak-urx"/>
                             <constraint firstItem="79y-OV-taq" firstAttribute="top" secondItem="5uc-FY-dcv" secondAttribute="bottom" constant="109" id="oKo-qt-WWH"/>
@@ -138,6 +143,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="UQR-Pr-0Er" id="MlF-9v-gH5"/>
                         <outlet property="webViewContainer" destination="nQy-L8-8QO" id="L7b-Tp-N9c"/>
                     </connections>
                 </viewController>

@@ -61,6 +61,7 @@ namespace PostMessageExp
         {
             var jsonRequest = CreateInitContainerRequest();
             GetIntInstance().SendToContainer(jsonRequest);
+            GetIntInstance().ShowLoader(IsVisible: true, timeout: 10);
         }
 
         public void SendToContainer()

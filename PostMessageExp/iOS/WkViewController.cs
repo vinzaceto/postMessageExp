@@ -57,6 +57,8 @@ namespace PostMessageExp.iOS
       
       var navigationDelegate = new PostMessageNavigationDelegate();
       wkWebview.NavigationDelegate = navigationDelegate;
+
+      activityIndicator.Hidden = true;
       
       await SetManager();
     }
@@ -95,12 +97,20 @@ namespace PostMessageExp.iOS
 
     public void ShowLoader(bool IsVisible, int timeout)
     {
-      
+      activityIndicator.Hidden = !IsVisible;
+      if (IsVisible)
+      {
+        this.activityIndicator.StartAnimating();
+      }
+      else
+      {
+        this.activityIndicator.StopAnimating();
+      }
     }
 
     public void ShowThankYouPage( /*ThankYouModel model*/)
     {
-      
+      this.activityIndicator.StartAnimating();
     }
 
     public void EvaluateJavascript(String command)
@@ -193,6 +203,11 @@ namespace PostMessageExp.iOS
       {
         var arguments = message.Body;
         System.Diagnostics.Debug.WriteLine("Contenuto arrivato " + arguments);
+
+        if (arguments.ToString().Contains("stopLoading"))
+        {
+          FatherVC.ShowLoader(IsVisible: false, timeout: 10);
+        }
       }
       else if (message.Name == "onHtmlLoadCompleted")
       {

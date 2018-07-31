@@ -13,6 +13,9 @@ namespace PostMessageExp.iOS
 	partial class WkViewController
 	{
 		[Outlet]
+		UIKit.UIActivityIndicatorView activityIndicator { get; set; }
+
+		[Outlet]
 		WebKit.WKWebView webView { get; set; }
 
 		[Outlet]
@@ -26,6 +29,11 @@ namespace PostMessageExp.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (activityIndicator != null) {
+				activityIndicator.Dispose ();
+				activityIndicator = null;
+			}
+
 			if (webView != null) {
 				webView.Dispose ();
 				webView = null;
